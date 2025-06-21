@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yash Varun - Data Analyst</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+            overflow-x: hidden; /* Prevent horizontal scrollbar caused by animations */
+        }
+        
+        /* --- HEADER STYLES --- */
+        #header .nav-link.active {
+            color: #ffffff;
+            font-weight: 600;
+            border-bottom: 2px solid white;
+        }
+
+        /* Style for section titles */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        /* --- BASE CARD STYLES --- */
+        .card-base {
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: transform 0.3s ease-out;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            background-color: white; /* Default background */
+        }
+        .card-base:hover {
+             transform: translateY(-5px);
+        }
+        .card-content {
+            flex-grow: 1;
+        }
+
+        /* --- STYLES FOR HOME SECTION --- */
+        #home {
+            position: relative;
+            overflow: hidden;
+            color: white;
+        }
+        #home::before { /* Background image with blur */
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            background-image: url('image4.jpg');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            filter: blur(5px);
+            transform: scale(1.1);
+        }
+        #home::after { /* Dark overlay for readability & hover gradient */
+             content: '';
+             position: absolute;
+             inset: 0;
+             z-index: 1;
+             background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255, 255, 255, 0.1) 0%, transparent 40%), rgba(0,0,0,0.5);
+        }
+        #home > div {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* --- STYLES FOR WORK SECTION --- */
+        #work {
+            position: relative;
+            overflow: hidden;
+        }
+        #work::before { /* Background image with blur */
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            background-image: url('image2.jpg');
+            background-attachment: fixed; /* Parallax-like effect */
+            background-size: cover;
+            background-position: center;
+            filter: blur(8px);
+            transform: scale(1.1); /* Prevent blurred edges */
+        }
+        #work::after { /* Dark overlay for readability */
+             content: '';
+             position: absolute;
+             inset: 0;
+             background: rgba(0,0,0,0.5);
+             z-index: 1;
+        }
+        #work .container {
+            position: relative;
+            z-index: 2; /* Content above background */
+        }
+        #work .section-title {
+            color: white; /* Make title readable on dark background */
+        }
+        /* Glassmorphism card style for project cards */
+        #work .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            transition: transform 0.3s ease-out;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+         /* Radial gradient hover effect for project cards */
+        #work .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            border-radius: inherit;
+            background: radial-gradient(circle at var(--x) var(--y), rgba(255, 255, 255, 0.2) 0%, transparent 40%);
+            opacity: 0;
+            transition: opacity 0.4s ease-out;
+        }
+        #work .card:hover::before {
+            opacity: 1;
+        }
+        #work .card:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        /* --- STYLES FOR ABOUT SECTION --- */
+        #about {
+            position: relative;
+            overflow: hidden;
+        }
+        #about::before { /* Background image with blur */
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            background-image: url('image3.jpg');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            filter: blur(8px);
+            transform: scale(1.1);
+        }
+        #about::after { /* Dark overlay for readability */
+             content: '';
+             position: absolute;
+             inset: 0;
+             background: rgba(0,0,0,0.6);
+             z-index: 1;
+        }
+        #about .container {
+            position: relative;
+            z-index: 2;
+        }
+        #about .section-title {
+            color: white;
+        }
+        #about .card-base {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        #about .card-base .text-gray-600 {
+            color: #d1d5db; /* Lighter gray for readability */
+        }
+        #about .card-base .skill-tag {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #f3f4f6;
+        }
+         /* Radial gradient hover effect for about cards */
+        #about .card-base::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            border-radius: inherit;
+            background: radial-gradient(circle at var(--x) var(--y), rgba(255, 255, 255, 0.2) 0%, transparent 40%);
+            opacity: 0;
+            transition: opacity 0.4s ease-out;
+        }
+        #about .card-base:hover::before {
+            opacity: 1;
+        }
+        #about .card-base:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        
+        #contact .section-title {
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .skill-tag {
+            background-color: #e9ecef;
+            color: #495057;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* Styles for scroll animations */
+        .scroll-animate, .scroll-animate-left, .scroll-animate-right {
+            opacity: 0;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .scroll-animate {
+             transform: translateY(30px) scale(0.98);
+        }
+        .scroll-animate-left {
+            transform: translateX(-30px);
+        }
+        .scroll-animate-right {
+            transform: translateX(30px);
+        }
+        .scroll-animate.in-view,
+        .scroll-animate-left.in-view,
+        .scroll-animate-right.in-view {
+            opacity: 1;
+            transform: translateY(0) scale(1) translateX(0);
+        }
+    </style>
+</head>
+<body class="bg-zinc-50 text-gray-800">
+
+    <!-- Header Section -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-shadow duration-300 bg-black/30 backdrop-blur-sm">
+        <div class="relative container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="text-xl font-bold tracking-tight text-white">Yash Varun</a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#work" class="nav-link text-gray-200 hover:text-white transition-colors duration-200 pb-1">Work</a>
+                <a href="#about" class="nav-link text-gray-200 hover:text-white transition-colors duration-200 pb-1">About</a>
+                <a href="#contact" class="nav-link bg-transparent border-2 border-white text-white px-4 py-2 rounded-lg hover:bg-white hover:text-black transition-all duration-300">Get in Touch</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 relative bg-black/90 backdrop-blur-sm">
+            <a href="#work" class="block py-2 text-white hover:text-gray-300">Work</a>
+            <a href="#about" class="block py-2 text-white hover:text-gray-300">About</a>
+            <a href="#contact" class="block mt-2 bg-white text-black px-4 py-2 rounded-lg text-center">Get in Touch</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center">
+            <div class="max-w-4xl mx-auto scroll-animate px-6">
+                <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-4 text-white" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5)">
+                    Hello. I am Yash.
+                </h1>
+                <p class="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto mb-8" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.5)">
+                    I'm a Data Analyst and Machine Learning developer based in Agra, Uttar Pradesh, specializing in machine learning and data-driven solutions. I leverage Python, TensorFlow, and Generative AI to build intelligent applications and solve complex problems.
+                </p>
+                <a href="#work" class="bg-white text-black px-8 py-3 rounded-lg font-semibold tracking-wide hover:bg-gray-200 transition-colors duration-200 inline-block">
+                    VIEW MY PROJECTS
+                </a>
+            </div>
+        </section>
+
+        <!-- Work Section -->
+        <section id="work" class="py-20 px-6">
+            <div class="container mx-auto">
+                <h2 class="section-title scroll-animate">Work & Projects</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project Cards -->
+                    <div class="card scroll-animate"><div class="card-content"><h3 class="text-xl font-bold mb-2">Baigan.in | Online Store</h3><p class="text-gray-200">Contributed to a local e-commerce platform by developing responsive web components and implementing a machine learning model to analyze and predict user traffic patterns, enhancing marketing strategies.</p></div></div>
+                    <div class="card scroll-animate" style="transition-delay: 100ms;"><div class="card-content"><h3 class="text-xl font-bold mb-2">Private Chatting Application</h3><p class="text-gray-200">Engineered a secure, end-to-end encrypted chat application using Python with a focus on data privacy. The application supports real-time messaging and user authentication.</p></div></div>
+                    <div class="card scroll-animate" style="transition-delay: 200ms;"><div class="card-content"><h3 class="text-xl font-bold mb-2">Human Activity Recognition</h3><p class="text-gray-200">Developed a robust HAR system using machine learning models to classify physical activities from sensor data. This project involved data preprocessing, feature engineering, and model evaluation.</p></div></div>
+                    <div class="card scroll-animate" style="transition-delay: 0ms;"><div class="card-content"><h3 class="text-xl font-bold mb-2">Home Automation (IoT)</h3><p class="text-gray-200">Created a smart home system using IoT principles. This project allows for remote monitoring and control of home appliances via a web interface, improving convenience and energy efficiency.</p></div></div>
+                    <div class="card scroll-animate" style="transition-delay: 100ms;"><div class="card-content"><h3 class="text-xl font-bold mb-2">Phoneme Level Speech Synthesis</h3><p class="text-gray-200">A deep dive into speech technology, this project focused on generating human-like speech from text with precise control over individual phonemes, a key component in advanced text-to-speech systems.</p></div></div>
+                    <div class="card scroll-animate" style="transition-delay: 200ms;"><div class="card-content"><h3 class="text-xl font-bold mb-2">Dropshipping Store</h3><p class="text-gray-200">Built and operated a successful e-commerce dropshipping store from the ground up, gaining hands-on experience in product sourcing, digital marketing, order fulfillment, and customer service.</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 px-6">
+            <div class="container mx-auto">
+                <h2 class="section-title scroll-animate">About Me</h2>
+                <div class="grid lg:grid-cols-5 gap-12 items-start">
+                    <div class="lg:col-span-3 scroll-animate-left card-base">
+                        <div class="card-content">
+                             <h3 class="text-2xl font-bold mb-4">Profile</h3>
+                            <p class="text-gray-600 mb-8">Dynamic and results-driven professional with a proven track record in leading teams to achieve organizational goals. Known for inspiring collaboration, fostering innovation, and driving performance improvements. Experienced in strategic planning, mentorship, and conflict resolution.</p>
+                            <h3 class="text-2xl font-bold mb-4">Education</h3>
+                            <div class="space-y-4">
+                                <div><h4 class="font-semibold text-lg">Chandigarh University (2021-2025)</h4><p class="text-gray-600">Computer Science Engineering</p></div>
+                                <div><h4 class="font-semibold text-lg">Air Force School (2017-2020)</h4><p class="text-gray-600">Intermediate (83%) & Matriculation (80%)</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-2 scroll-animate-right card-base">
+                       <div class="card-content">
+                            <h3 class="text-2xl font-bold mb-4">Skills</h3>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="skill-tag scroll-animate" style="transition-delay: 100ms;">Machine Learning</span>
+                                <span class="skill-tag scroll-animate" style="transition-delay: 150ms;">Python</span>
+                                <span class="skill-tag scroll-animate" style="transition-delay: 200ms;">TensorFlow</span>
+                                <span class="skill-tag scroll-animate" style="transition-delay: 250ms;">Power BI</span>
+                                <span class="skill-tag scroll-animate" style="transition-delay: 300ms;">Generative AI</span>
+                                <span class="skill-tag scroll-animate" style="transition-delay: 350ms;">Flask</span>
+                                <span class="skill-tag scroll-animate" style="transition-delay: 400ms;">TypeScript</span>
+                                <span class="skill-tag scroll-animate" style="transition-delay: 450ms;">AWS</span>
+                            </div>
+                            <h3 class="text-2xl font-bold mt-8 mb-4">Awards & Certifications</h3>
+                            <ul class="list-disc list-inside text-gray-600 space-y-2">
+                                <li class="scroll-animate" style="transition-delay: 500ms;">Best Engineering Project, Chandigarh University, 2025</li>
+                                <li class="scroll-animate" style="transition-delay: 550ms;">Deep And Reinforcement Learning</li>
+                                <li class="scroll-animate" style="transition-delay: 600ms;">Typescript by Infosys</li>
+                                <li class="scroll-animate" style="transition-delay: 650ms;">AWS Website Deployment by Amazon</li>
+                                <li class="scroll-animate" style="transition-delay: 700ms;">Python And Flask by IBM</li>
+                                <li class="scroll-animate" style="transition-delay: 750ms;">Python Programming by Google</li>
+                                <li class="scroll-animate" style="transition-delay: 800ms;">National Cyber Olympiad, 2019</li>
+                            </ul>
+                       </div>
+                    </div>
+                </div>
+            </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 px-6 relative overflow-hidden">
+             <!-- Background Image and Blur for Contact Section -->
+            <div class="absolute inset-0 z-0">
+                <div class="absolute inset-0 bg-cover bg-center" style="background-image: url(image.jpg); filter: blur(8px); transform: scale(1.1);"></div>
+                <!-- No dark overlay here, as requested -->
+            </div>
+            <div class="container mx-auto text-center relative z-10 scroll-animate">
+                <h2 class="section-title text-white" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.6)">Get In Touch</h2>
+                <p class="text-lg text-white mb-8 max-w-xl mx-auto" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.6)">I'm always open to discussing new projects, creative ideas, or opportunities to be part of an amazing team. Feel free to reach out.</p>
+                <div class="flex flex-col md:flex-row justify-center items-center gap-8 text-white" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.6)">
+                    <a href="mailto:Yashvarun2001@gmail.com" class="text-xl font-medium hover:underline">Yashvarun2001@gmail.com</a>
+                    <a href="https://www.linkedin.com/in/yash-varun-485bbb237" target="_blank" rel="noopener noreferrer" class="text-xl font-medium hover:underline">LinkedIn Profile</a>
+                    <p class="text-lg">+91 9719500115</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-6 bg-gray-100">
+        <p class="text-gray-500">&copy; 2024 Yash Varun. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- MOBILE MENU LOGIC ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // --- SCROLL ANIMATION LOGIC ---
+            const animatedElements = document.querySelectorAll('.scroll-animate, .scroll-animate-left, .scroll-animate-right');
+            const animationObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                    } else {
+                         entry.target.classList.remove('in-view');
+                    }
+                });
+            }, { 
+                threshold: 0.15 
+            });
+            animatedElements.forEach(el => {
+                animationObserver.observe(el);
+            });
+            
+            // --- GRADIENT HOVER EFFECT SCRIPT ---
+            const hoverableElements = document.querySelectorAll('#home, #work .card, #about .card-base');
+            hoverableElements.forEach(el => {
+                el.addEventListener('mousemove', e => {
+                    const rect = el.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    el.style.setProperty('--x', `${x}px`);
+                    el.style.setProperty('--y', `${y}px`);
+                });
+            });
+
+            // --- NAVIGATION AND HEADER LOGIC ---
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('#header .nav-link');
+            const header = document.getElementById('header');
+            
+            const handleHeaderShadow = () => {
+                // Not needed for the image header style
+            }
+            const observerOptions = {
+                root: null,
+                rootMargin: '-80px 0px -50% 0px',
+                threshold: 0
+            };
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            const linkHref = link.getAttribute('href');
+                            if (linkHref === `#${id}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+            
+            window.addEventListener('scroll', handleHeaderShadow);
+        });
+    </script>
+</body>
+</html>
